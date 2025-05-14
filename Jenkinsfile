@@ -3,12 +3,8 @@ pipeline {
 
   environment {
     ECR_REPO = '585008048344.dkr.ecr.ap-south-1.amazonaws.com/todo-flask-app'
-    IMAGE_NAME = 'todo-flask-app'
+    IMAGE_NAME = 'todoapp'
     SONARQUBE = 'MySonar'
-  }
-
-  tools {
-    sonarQubeScanner 'SonarQube'
   }
 
   stages {
@@ -29,9 +25,9 @@ pipeline {
     stage('Docker Build & Push') {
       steps {
         sh 'docker build -t $IMAGE_NAME .'
-        sh 'aws ecr get-login-password | docker login --username AWS --password-stdin $ECR_REPO'
-        sh 'docker tag $IMAGE_NAME:latest $ECR_REPO/$IMAGE_NAME:latest'
-        sh 'docker push $ECR_REPO/$IMAGE_NAME:latest'
+        sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $ECR_REPO'
+        sh 'docker tag $IMAGE_NAME:latest $ECR_REPO:latest'
+        sh 'docker push $ECR_REPO:latest'
       }
     }
 
@@ -43,6 +39,3 @@ pipeline {
     }
   }
 }
-
-
-
