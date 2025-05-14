@@ -2,17 +2,12 @@ pipeline {
   agent any
 
   environment {
-    ECR_REPO = '272258873932.dkr.ecr.ap-south-1.amazonaws.com/todoapp'  // ✅ Your actual ECR repo URL
-    IMAGE_NAME = 'todoapp'
+    ECR_REPO = '585008048344.dkr.ecr.ap-south-1.amazonaws.com/todo-flask-app'  // ✅ Your actual ECR repo URL
+    IMAGE_NAME = 'todo-flask-app'
     SONARQUBE = 'MySonar'  // ✅ This must match name from Jenkins > Manage Jenkins > Configure System > SonarQube servers
   }
 
-  tools {
-    // ✅ This must match the name from Global Tool Configuration
-    // If you're using latest plugin, use 'SonarQube Scanner for MSBuild' if required, or 'sonar-scanner'
-    // We'll assume it's 'sonar-scanner' here:
-    // Note: If you're using Declarative Pipeline and latest plugin, this might not even be needed
-  }
+
 
   stages {
     stage('Checkout') {
