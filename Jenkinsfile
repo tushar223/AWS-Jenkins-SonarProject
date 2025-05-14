@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+    agent any
+
+    tools {
+        sonarQubeScanner 'sonar-scanner' // ← This name must match the one in your screenshot
+    }
 
   environment {
     ECR_REPO = '585008048344.dkr.ecr.ap-south-1.amazonaws.com/todo-flask-app'  // ✅ Your actual ECR repo URL
